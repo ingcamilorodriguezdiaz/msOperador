@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Products by Name</title>
+</head>
+<body>
+    <script>
+        // Función para buscar productos por nombre
+        const searchProductsByName = async (name) => {
+            try {
+                const response = await fetch(`http://localhost:7001/product/search?name=${name}`);
+                const data = await response.json();
+                console.log(data);
+            } catch (error) {
+                console.error('Error al buscar productos por nombre:', error);
+            }
+        };
+
+        // Llamar a la función de búsqueda
+        let productNameToSearch = 'Producto 4';
+        searchProductsByName(productNameToSearch);
+    </script>
+</body>
+</html>

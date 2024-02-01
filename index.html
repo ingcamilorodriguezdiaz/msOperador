@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+const apiUrl = 'http://localhost:7000/product';
+
+// Función para realizar una solicitud GET
+async function getAllProducts() {
+  try {
+    const response = await fetch(apiUrl);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error al obtener productos:', error);
+  }
+}
+
+// Función para realizar una solicitud GET por ID
+async function getProductById(id) {
+  try {
+    const response = await fetch(`${apiUrl}/${id}`);
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(`Error al obtener el producto con ID ${id}:`, error);
+  }
+}
+
+// Función para realizar una solicitud POST
+async function createProduct(product) {
+  try {
+    const response = await fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(product),
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error('Error al crear el producto:', error);
+  }
+}
+
+// Función para realizar una solicitud PUT por ID
+async function updateProduct(id, updatedProduct) {
+  try {
+    const response = await fetch(`${apiUrl}/${id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(updatedProduct),
+    });
+    const data = await response.json();
+    console.log(data);
+  } catch (error) {
+    console.error(`Error al actualizar el producto con ID ${id}:`, error);
+  }
+}
+
+// Función para realizar una solicitud DELETE por ID
+async function deleteProduct(id) {
+  try {
+    const response = await fetch(`${apiUrl}/${id}`, {
+      method: 'DELETE',
+    });
+    console.log('Producto eliminado correctamente.');
+  } catch (error) {
+    console.error(`Error al eliminar el producto con ID ${id}:`, error);
+  }
+}
+
+// Ejemplos de uso
+getAllProducts();
+getProductById(1);
+createProduct({ name: 'Nuevo Producto', price: 19.99 });
+updateProduct(1, { name: 'Producto Actualizado', price: 29.99 });
+deleteProduct(2);
+
+    </script>
+</body>
+</html>
